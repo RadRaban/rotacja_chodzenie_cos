@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0c2wep6sl753"]
+[gd_scene load_steps=12 format=3 uid="uid://b0c2wep6sl753"]
 
 [ext_resource type="Script" uid="uid://nau3bwd41f0x" path="res://player.gd" id="1_3mqyj"]
+[ext_resource type="Texture2D" uid="uid://di27edfvasoxr" path="res://textures/bloodybrick.jpg" id="2_1ax8s"]
+[ext_resource type="Texture2D" uid="uid://c4l1gi55je8yr" path="res://textures/satara_night_4k.hdr" id="3_ff7ye"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ax8s"]
 
@@ -8,7 +10,24 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tjpr8"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ff7ye"]
+albedo_texture = ExtResource("2_1ax8s")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(2.255, 2.095, 1.075)
+uv1_offset = Vector3(-0.005, 0, 0)
+
 [sub_resource type="BoxMesh" id="BoxMesh_6x6qc"]
+material = SubResource("StandardMaterial3D_ff7ye")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tjpr8"]
+panorama = ExtResource("3_ff7ye")
+
+[sub_resource type="Sky" id="Sky_6x6qc"]
+sky_material = SubResource("PanoramaSkyMaterial_tjpr8")
+
+[sub_resource type="Environment" id="Environment_uog5h"]
+background_mode = 2
+sky = SubResource("Sky_6x6qc")
 
 [node name="Node3D" type="Node3D"]
 
@@ -27,12 +46,55 @@ mesh = SubResource("CapsuleMesh_ff7ye")
 [node name="Camera3D" type="Camera3D" parent="Player/Head"]
 current = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Platforma" type="StaticBody3D" parent="."]
 transform = Transform3D(10.195, 0, 0, 0, 0.85, 0, 0, 0, 8.59, 0, -1.46041, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforma"]
 transform = Transform3D(1.005, 0, 0, 0, 1.005, 0, 0, 0, 1.005, 0, 0, 0)
 shape = SubResource("BoxShape3D_tjpr8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforma"]
 mesh = SubResource("BoxMesh_6x6qc")
+
+[node name="sciana" type="StaticBody3D" parent="."]
+transform = Transform3D(0.595537, 0, 0, 0, 6.1216, 0, 0, 0, 8.59, -4.97162, 1.26533, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sciana"]
+transform = Transform3D(1.005, 0, 0, 0, 1.005, 0, 0, 0, 1.005, 0, 0, 0)
+shape = SubResource("BoxShape3D_tjpr8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="sciana"]
+mesh = SubResource("BoxMesh_6x6qc")
+
+[node name="sciana 2" type="StaticBody3D" parent="."]
+transform = Transform3D(10.5283, 0, 0, 0, 1.3516, 0, 0, 0, 0.712928, 0.103794, -0.837899, 4.08652)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sciana 2"]
+transform = Transform3D(1.005, 0, 0, 0, 1.005, 0, 0, 0, 1.005, 0, 0, 0)
+shape = SubResource("BoxShape3D_tjpr8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="sciana 2"]
+mesh = SubResource("BoxMesh_6x6qc")
+
+[node name="sciana 3" type="StaticBody3D" parent="."]
+transform = Transform3D(9.98037, 0, 0, 0, 2.11972, 0, 0, 0, 0.773767, -0.0659962, -0.0829026, -3.92434)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sciana 3"]
+transform = Transform3D(1.005, 0, 0, 0, 1.005, 0, 0, 0, 1.005, 0, 0, 0)
+shape = SubResource("BoxShape3D_tjpr8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="sciana 3"]
+mesh = SubResource("BoxMesh_6x6qc")
+
+[node name="sciana 4" type="StaticBody3D" parent="."]
+transform = Transform3D(0.595537, 0, 0, 0, 3.19297, 0, 0, 0, 8.59, 5.21981, -0.316468, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sciana 4"]
+transform = Transform3D(1.005, 0, 0, 0, 1.005, 0, 0, 0, 1.005, 0, 0, 0)
+shape = SubResource("BoxShape3D_tjpr8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="sciana 4"]
+mesh = SubResource("BoxMesh_6x6qc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uog5h")
