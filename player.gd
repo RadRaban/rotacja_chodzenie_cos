@@ -4,7 +4,13 @@ const SPEED = 4.0
 const GRAVITY = 9.8
 @onready var head = $Head
 
+var pitch_angle = 0.0
+var MAX_PITCH = deg_to_rad(80.0)
+var MIN_PITCH = deg_to_rad(-80.0)
 
+# Czułość
+var ROTATE_SPEED = 2.5   # obrót gracza (lewo/prawo) – akcelerometr
+var PITCH_SPEED = 5.0    # obrót kamery (góra/dół) – żyroskop
 
 func _physics_process(delta):
 	# Grawitacja
@@ -13,15 +19,22 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0
 
-	# Obracanie kamerą przez akcelerometr (poniżej poprawimy oś Y)
+	# 📱 Akcelerometr – pochylanie telefonu lewo/prawo (do obracania gracza)
+	var accel = Input.get_accelerometer()
+	var roll = accel.x  # ←→
+
+	# 📱 Żyroskop – obracanie telefonu (do kamery góra/dół)
 	var gyro = Input.get_gyroscope()
-	var yaw = gyro.y * delta * -5
-	var pitch = gyro.x * delta * -5
+	var pitch_delta = gyro.x * PITCH_SPEED * delta
 
-	rotate_y(-yaw)
-	head.rotate_x(-pitch)
+	# ✅ Obracamy gracza lewo/prawo cały czas, gdy ekran pochylony
+	rotate_y(-roll * ROTATE_SPEED * delta)
 
-	# 👉 Ruch do przodu po dotknięciu ekranu
+	# ✅ Kamera – obrót góra/dół z limitem
+	pitch_angle = clamp(pitch_angle + pitch_delta, MIN_PITCH, MAX_PITCH)
+	head.rotation.x = pitch_angle
+
+	# 👉 Ruch do przodu przy dotknięciu ekranu
 	if Input.is_action_pressed("touch"):
 		var forward = -transform.basis.z
 		velocity.x = forward.x * SPEED
@@ -29,13 +42,5 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0
 		velocity.z = 0
-		
-	
-	move_and_slide()
-	
-func _unhandled_input(event):
-	if event is InputEventScreenTouch and event.pressed:
-		print("Ekran dotknięty!")
 
-	if event is InputEventMouseButton and event.pressed:
-		print("Kliknięcie myszy!")
+	move_and_slide()
