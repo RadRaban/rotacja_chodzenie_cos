@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0c2wep6sl753"]
+[gd_scene load_steps=7 format=3 uid="uid://b0c2wep6sl753"]
 
 [ext_resource type="Script" uid="uid://nau3bwd41f0x" path="res://player.gd" id="1_3mqyj"]
+[ext_resource type="PackedScene" uid="uid://jl5imnd8ov32" path="res://modele/chair.glb" id="2_1ax8s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ax8s"]
 
@@ -36,3 +37,6 @@ shape = SubResource("BoxShape3D_tjpr8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_6x6qc")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_1ax8s")]
+transform = Transform3D(0.253489, -1.023e-05, -0.000214291, 1.25929e-05, 0.204045, -0.00016236, 0.000197226, 0.000120271, 0.275432, -2.18003, 0.630607, 3.81709)

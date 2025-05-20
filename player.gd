@@ -9,8 +9,24 @@ var MAX_PITCH = deg_to_rad(80.0)
 var MIN_PITCH = deg_to_rad(-80.0)
 
 # Czułość
-var ROTATE_SPEED = 2.5   # obrót gracza (lewo/prawo) – akcelerometr
-var PITCH_SPEED = 5.0    # obrót kamery (góra/dół) – żyroskop
+var ROTATE_SPEED = 2.5  # akcelerometr – obrót gracza
+var PITCH_SPEED = 5.0   # żyroskop – kamera góra/dół
+var MOUSE_SENS = 0.002  # czułość myszy
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _input(event):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		get_tree().quit()  # Zamknij grę
+		
+	if event is InputEventMouseMotion:
+		# Obrót gracza lewo/prawo
+		rotate_y(-event.relative.x * MOUSE_SENS)
+		
+		# Obrót kamery góra/dół
+		pitch_angle = clamp(pitch_angle - event.relative.y * MOUSE_SENS, MIN_PITCH, MAX_PITCH)
+		head.rotation.x = pitch_angle
 
 func _physics_process(delta):
 	# Grawitacja
@@ -19,28 +35,36 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0
 
-	# 📱 Akcelerometr – pochylanie telefonu lewo/prawo (do obracania gracza)
+	# 📱 Akcelerometr – pochylanie telefonu lewo/prawo
 	var accel = Input.get_accelerometer()
-	var roll = accel.x  # ←→
-
-	# 📱 Żyroskop – obracanie telefonu (do kamery góra/dół)
-	var gyro = Input.get_gyroscope()
-	var pitch_delta = gyro.x * PITCH_SPEED * delta
-
-	# ✅ Obracamy gracza lewo/prawo cały czas, gdy ekran pochylony
+	var roll = accel.x
 	rotate_y(-roll * ROTATE_SPEED * delta)
 
-	# ✅ Kamera – obrót góra/dół z limitem
+	# 📱 Żyroskop – obrót kamery góra/dół
+	var gyro = Input.get_gyroscope()
+	var pitch_delta = gyro.x * PITCH_SPEED * delta
 	pitch_angle = clamp(pitch_angle + pitch_delta, MIN_PITCH, MAX_PITCH)
 	head.rotation.x = pitch_angle
 
-	# 👉 Ruch do przodu przy dotknięciu ekranu
+	# 👉 Ruch – dotyk (do przodu) + WASD
+	var direction = Vector3.ZERO
+
+	# Ekran dotknięty – do przodu
 	if Input.is_action_pressed("touch"):
-		var forward = -transform.basis.z
-		velocity.x = forward.x * SPEED
-		velocity.z = forward.z * SPEED
-	else:
-		velocity.x = 0
-		velocity.z = 0
+		direction -= transform.basis.z
+
+	# Klawiatura – WASD
+	if Input.is_action_pressed("ui_up"):
+		direction -= transform.basis.z
+	if Input.is_action_pressed("ui_down"):
+		direction += transform.basis.z
+	if Input.is_action_pressed("ui_left"):
+		direction -= transform.basis.x
+	if Input.is_action_pressed("ui_right"):
+		direction += transform.basis.x
+
+	direction = direction.normalized()
+	velocity.x = direction.x * SPEED
+	velocity.z = direction.z * SPEED
 
 	move_and_slide()
