@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://835rv54xq0dr"
-path.s3tc="res://.godot/imported/chair_0.png-450f90111805edf59f586c4db6df33f6.s3tc.ctex"
-path.etc2="res://.godot/imported/chair_0.png-450f90111805edf59f586c4db6df33f6.etc2.ctex"
+uid="uid://ouf0vij35r24"
+path.s3tc="res://.godot/imported/chair_0.png-cb9fac0e1e24efd20941e116ab9471e5.s3tc.ctex"
+path.etc2="res://.godot/imported/chair_0.png-cb9fac0e1e24efd20941e116ab9471e5.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://modele/chair_0.png"
-dest_files=["res://.godot/imported/chair_0.png-450f90111805edf59f586c4db6df33f6.s3tc.ctex", "res://.godot/imported/chair_0.png-450f90111805edf59f586c4db6df33f6.etc2.ctex"]
+source_file="res://modele/krzeslo/chair_0.png"
+dest_files=["res://.godot/imported/chair_0.png-cb9fac0e1e24efd20941e116ab9471e5.s3tc.ctex", "res://.godot/imported/chair_0.png-cb9fac0e1e24efd20941e116ab9471e5.etc2.ctex"]
 
 [params]
 

@@ -1,9 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0c2wep6sl753"]
+[gd_scene load_steps=10 format=3 uid="uid://b0c2wep6sl753"]
 
 [ext_resource type="Script" uid="uid://nau3bwd41f0x" path="res://skrypty/player.gd" id="1_3mqyj"]
 [ext_resource type="Script" uid="uid://8shaun1xcpas" path="res://skrypty/gra_na_tel.gd" id="1_ff7ye"]
-[ext_resource type="PackedScene" uid="uid://jl5imnd8ov32" path="res://modele/chair.glb" id="2_1ax8s"]
-[ext_resource type="Texture2D" uid="uid://b5pjgak6l0j50" path="res://mapy poziomow/mapa.jpg" id="2_tjpr8"]
+[ext_resource type="PackedScene" uid="uid://cdqtokm3vd22f" path="res://sceny z przedmiotami/krzeslo.tscn" id="3_tjpr8"]
+
+[sub_resource type="Image" id="Image_ff7ye"]
+data = {
+"data": PackedByteArray(255, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 12),
+"format": "RGB8",
+"height": 3,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_tjpr8"]
+image = SubResource("Image_ff7ye")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ax8s"]
 
@@ -15,8 +26,8 @@
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ff7ye")
-mapa_obrazek = ExtResource("2_tjpr8")
-prefab_krzeslo = ExtResource("2_1ax8s")
+mapa_obrazek = SubResource("ImageTexture_tjpr8")
+prefab_krzeslo = ExtResource("3_tjpr8")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0384121, 0, 0)
@@ -42,6 +53,3 @@ shape = SubResource("BoxShape3D_tjpr8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_6x6qc")
-
-[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_1ax8s")]
-transform = Transform3D(0.253489, -1.023e-05, -0.000214291, 1.25929e-05, 0.204045, -0.00016236, 0.000197226, 0.000120271, 0.275432, -2.18003, 0.630607, 3.81709)

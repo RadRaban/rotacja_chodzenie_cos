@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://jl5imnd8ov32"
-path="res://.godot/imported/chair.glb-480918286b190755493adccac34aa622.scn"
+uid="uid://lfj34sw55wbp"
+path="res://.godot/imported/chair.glb-d0a045b154678860ae2634522915f580.scn"
 
 [deps]
 
-source_file="res://modele/chair.glb"
-dest_files=["res://.godot/imported/chair.glb-480918286b190755493adccac34aa622.scn"]
+source_file="res://modele/krzeslo/chair.glb"
+dest_files=["res://.godot/imported/chair.glb-d0a045b154678860ae2634522915f580.scn"]
 
 [params]
 
