@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://55of014bqs43"]
+
+[ext_resource type="PackedScene" uid="uid://jl5imnd8ov32" path="res://modele/chair.glb" id="1_4es1e"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_4es1e")]
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(0.12588, 0, 0, 0, 3.65573e-17, 0.0944247, 0, -0.164639, 2.09665e-17, 0, 0.140573, 0)

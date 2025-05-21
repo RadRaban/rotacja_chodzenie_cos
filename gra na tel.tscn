@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0c2wep6sl753"]
+[gd_scene load_steps=9 format=3 uid="uid://b0c2wep6sl753"]
 
-[ext_resource type="Script" uid="uid://nau3bwd41f0x" path="res://player.gd" id="1_3mqyj"]
+[ext_resource type="Script" uid="uid://nau3bwd41f0x" path="res://skrypty/player.gd" id="1_3mqyj"]
+[ext_resource type="Script" uid="uid://8shaun1xcpas" path="res://skrypty/gra_na_tel.gd" id="1_ff7ye"]
 [ext_resource type="PackedScene" uid="uid://jl5imnd8ov32" path="res://modele/chair.glb" id="2_1ax8s"]
+[ext_resource type="Texture2D" uid="uid://b5pjgak6l0j50" path="res://mapy poziomow/mapa.jpg" id="2_tjpr8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ax8s"]
 
@@ -12,6 +14,9 @@
 [sub_resource type="BoxMesh" id="BoxMesh_6x6qc"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_ff7ye")
+mapa_obrazek = ExtResource("2_tjpr8")
+prefab_krzeslo = ExtResource("2_1ax8s")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0384121, 0, 0)
